@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.SignalR;
 using SignalR.Web.Models;
+using Ticker.hubs;
 
 namespace Ticker.Controllers
 {
@@ -31,12 +33,12 @@ namespace Ticker.Controllers
         }
 
         // POST: api/Tickets
-        public void Post([FromBody]Ticket ticket)
+        public void Post([FromBody]Ticket data)
         {
-            _repository.AddTicket(ticket);
+            _repository.AddTicket(data);
 
-            //   var _context =   GlobalHost.ConnectionManager.GetHubContext<TicketHub>();            
-            //   _context.Clients.All.addNewTicket(ticket);
+            var context = GlobalHost.ConnectionManager.GetHubContext<DataHub>();
+            context.Clients.All.addNewTicket(data);
 
         }
     }

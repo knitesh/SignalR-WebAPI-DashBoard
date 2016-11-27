@@ -10,17 +10,17 @@ angular.module('signalrApp.data', ['ngResource'])
        
         return {
             on: function (eventName, callback) {
-                //var connection = $.hubConnection();
-                //var ticketHubProxy = connection.createHubProxy('ticketHub');
+                var connection = $.hubConnection();
+                var ticketHubProxy = connection.createHubProxy('dataHub');
               
-                //ticketHubProxy.on(eventName, function () {                  
-                //    var args = arguments;
-                //    $rootScope.$apply(function () {
-                //        callback.apply(ticketHubProxy, args);
-                //    });
-                //});
+                ticketHubProxy.on(eventName, function () {                  
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        callback.apply(ticketHubProxy, args);
+                    });
+                });
 
-                //connection.start().done(function () { });
+                connection.start().done(function () { });
 
             }
         };
