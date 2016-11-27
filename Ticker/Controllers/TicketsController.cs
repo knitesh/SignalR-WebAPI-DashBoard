@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.SignalR;
-using SignalR.Web.Models;
 using Ticker.hubs;
+using Ticker.Models;
 
 namespace Ticker.Controllers
 {
@@ -19,13 +20,6 @@ namespace Ticker.Controllers
             if (repository == null) throw new ArgumentNullException("repository");
             _repository = repository;
         }
-        //public TicketsController()
-        //{
-        //   ITicketRepository repository = new TicketRepository();
-        //    if (repository == null) throw new ArgumentNullException("repository");
-        //    _repository = repository;
-        //}
-
         // GET: api/Tickets
         public IEnumerable<Ticket> Get()
         {
@@ -38,7 +32,18 @@ namespace Ticker.Controllers
             _repository.AddTicket(data);
 
             var context = GlobalHost.ConnectionManager.GetHubContext<DataHub>();
-            context.Clients.All.addNewTicket(data);
+            context.Clients.All.addNewItem(data);
+
+        }
+
+        [Route("api/Ping")]
+        public async Task<Ticket> Ping()
+        {
+            Ticket data = await _repository.Ping();
+
+            var context = GlobalHost.ConnectionManager.GetHubContext<DataHub>();
+            context.Clients.All.addNewItem(data);
+            return data;
 
         }
     }

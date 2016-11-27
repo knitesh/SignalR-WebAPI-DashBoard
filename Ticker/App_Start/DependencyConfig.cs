@@ -1,7 +1,6 @@
 ﻿using System.Web.Http;
 using LightInject;
-using SignalR.Web.Models;
-
+using Ticker.Models;
 
 
 namespace Ticker

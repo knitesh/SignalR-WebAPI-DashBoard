@@ -1,13 +1,12 @@
 angular.module('signalrApp.data', ['ngResource'])
-    .factory('Tickets', ['$resource', function ($resource) {
+    .factory('Item', ['$resource', function ($resource) {
         'use strict';
 
         return $resource('/api/tickets');
     }])   
-    .factory('TicketStream', ['$rootScope', function ($rootScope) {
+    .factory('ItemStream', ['$rootScope', function ($rootScope) {
         'use strict';
-
-       
+        
         return {
             on: function (eventName, callback) {
                 var connection = $.hubConnection();
@@ -19,7 +18,7 @@ angular.module('signalrApp.data', ['ngResource'])
                         callback.apply(ticketHubProxy, args);
                     });
                 });
-
+               
                 connection.start().done(function () { });
 
             }

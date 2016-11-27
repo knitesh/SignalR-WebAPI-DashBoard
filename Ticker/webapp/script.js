@@ -15,13 +15,13 @@ signalrApp.config(function ($routeProvider) {
 
         // route for the about page
         .when('/about', {
-            templateUrl: 'webapp/pages/about.html',
+            templateUrl: baseComponent +  'about/about.html',
             controller: 'aboutController'
         })
 
         // route for the contact page
         .when('/contact', {
-            templateUrl: 'webapp/pages/contact.html',
+            templateUrl: baseComponent + 'contact/contact.html',
             controller: 'contactController'
         })
         .when('/Dashboard', {
@@ -37,35 +37,3 @@ signalrApp.config(function ($routeProvider) {
     });
 });
 
-
-signalrApp.controller('aboutController', function ($scope) {
-    $scope.message = 'Look! I am an about page.';
-});
-
-signalrApp.controller('contactController', function ($scope) {
-    $scope.message = 'Contact us! JK. This is just a demo.';
-});
-
-
-signalrApp.controller('CreateCtrl', [
-    '$scope', '$location', 'Tickets', function($scope, $location, Tickets) {
-        "use strict";
-
-        $scope.save = function(newTicket) {
-            Tickets.save(newTicket, function() {
-                $location.path('/Dashboard');
-            });
-        };
-
-        $scope.cancel = function() {
-            $location.path('/');
-        }
-
-    }
-]);
-   
-signalrApp.filter('reverse', function () {
-        return function (items) {
-            return items.slice().reverse();
-        };
-    });

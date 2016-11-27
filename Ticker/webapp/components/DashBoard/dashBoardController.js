@@ -1,9 +1,9 @@
-﻿signalrApp.controller('DashboardCtrl', ['$scope', 'Tickets', 'TicketStream', function ($scope, Tickets, TicketStream) {
+﻿signalrApp.controller('DashboardCtrl', ['$scope', 'Item', 'ItemStream', function ($scope, Item, ItemStream) {
     "use strict";
 
-    $scope.tickets = Tickets.query();
+    $scope.tickets = Item.query();
 
-    TicketStream.on('addNewTicket', function (newTicket) {
+    ItemStream.on('addNewItem', function (newTicket) {
         $scope.tickets.push(newTicket);
     });
 

@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net.Http;
+using System.Threading.Tasks;
 
-namespace SignalR.Web.Models
+namespace Ticker.Models
 {
     public class TicketRepository : ITicketRepository
     {
-        private List<Ticket> _localTickets;
+        private readonly List<Ticket> _localTickets;
+
 
         public TicketRepository()
         {
@@ -27,5 +28,36 @@ namespace SignalR.Web.Models
         {
             _localTickets.Add(ticket);
         }
+
+        public async Task<Ticket> Ping()
+        {
+            Ticket localTicket = null;
+            var next = _localTickets.Count > 0 ? _localTickets.Count + 1 : 1;
+
+
+            var page = "https://jsonplaceholder.typicode.com/comments/" + next;
+
+            // ... Use HttpClient.
+            using (var localclient = new HttpClient())
+            {
+                using (var response = await localclient.GetAsync(page))
+                {
+                    using (var content = response.Content)
+                    {
+                        // ... Read New Data.
+                        var result = await content.ReadAsAsync<Comments>();
+
+                        // ... Display the result.
+                        if (result == null) return (Ticket)null;
+                        //Format it to local Data
+                        localTicket = new Ticket(result.name, result.body);
+                        _localTickets.Add(localTicket);
+                    }
+                }
+
+            }
+            return localTicket;
+        }
+
     }
 }

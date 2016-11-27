@@ -5,22 +5,19 @@
 
 <head>
     <title>SignalR with Angular Demo App</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Angular-SignalR Demo">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript,Angular, SignalR">
+    <meta name="author" content="Kumar Nitesh">
 
-    <!-- SCROLLS -->
+    <!-- Styles -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css"/>
-    <!-- Signal R-->
-    <script src="Scripts/jquery.signalR-2.2.1.min.js"></script>
-    <!-- SPELLS -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9//angular.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular-route.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9//angular-resource.js"></script>
-    <script src="webapp/script.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
 </head>
 
 <!-- define angular controller -->
 <body>
-
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -35,28 +32,38 @@
             </ul>
         </div>
     </nav>
+    <div id="main">
 
-<div id="main">
+        <!-- angular templating -->
+        <!-- this is where content will be injected -->
+        <div ng-view></div>
 
-    <!-- angular templating -->
-    <!-- this is where content will be injected -->
-    <div ng-view></div>
-
-</div>
-    
-
-<!--Directives-->
-    <!--Services-->
+    </div>
 
 
+    <!-- Signal R-->
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <!-- Angular -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9//angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular-route.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9//angular-resource.js"></script>
     <!--Main-->
-<script src="webapp/script.js"></script>
-<script src="webapp/TicketData.js"></script>
-
+    <script src="webapp/script.js"></script>
+    <script src="webapp/components/factories/TicketData.js"></script>
+    <!--filters-->
+    <script src="webapp/components/filters/reverse.js"></script>
+    <!--Directives-->
+    <!--Services-->
     <!--Controllers-->
-<script src="webapp/components/home/homeController.js"></script>
+    <script src="webapp/components/home/homeController.js"></script>
     <script src="webapp/components/DashBoard/dashBoardController.js"></script>
-
+    <script src="webapp/components/New/newController.js"></script>
+    <script src="webapp/components/contact/contactController.js"></script>
+    <script src="webapp/components/about/aboutController.js"></script>
+<footer class="col-md-12 text-center">
+    <label style="color: #313131"> &copy; Kumar-nitesh.com 2016-2017</label>
+</footer>
 
 </body>
 
