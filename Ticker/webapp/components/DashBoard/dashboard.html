@@ -1,9 +1,33 @@
-<a ng-href="#/new">Enter New Data</a>
-<div class="list-group">
+<div class="container">
+    <div class="col-xs-12">
+        <a ng-href="#/new">Enter New Data</a>
+    </div>
 
-    <div class="list-group-item" ng-repeat="ticket in tickets | reverse">
-        <h4 class="list-group-item-heading">{{ticket.title}}</h4>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( tickets.length + '%' ) }">
+                    <span class="sr-only">{{tickets.length}}% Complete</span>
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow={{tickets.length}} aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( tickets.length + '%' ) }">
+                    {{tickets.length}}%
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <hr />
+            <span class="label label-warning">New Info will appear below:</span>
+            <hr/>
+            <div class="list-group">
 
-        <p class="list-group-item-text">{{ticket.desc}}</p>
+                <div class="list-group-item" ng-repeat="ticket in tickets | reverse">
+                    <h4 class="list-group-item-heading">{{ticket.title}}</h4>
+
+                    <p class="list-group-item-text">{{ticket.desc}}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
